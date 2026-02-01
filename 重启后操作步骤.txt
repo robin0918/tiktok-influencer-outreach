@@ -1,0 +1,40 @@
+重启后操作步骤
+
+  1. 重启计算机后，打开命令提示符
+  2. 验证clawdbot状态：
+  cd "C:\Users\Administrator\clawd"
+  clawdbot gateway status
+  3. 如果显示未运行，启动服务：
+  fix_clawdbot.bat
+  3. 或手动：
+  clawdbot gateway run --verbose --force --port 18790
+
+  长期运行建议
+
+  选项A：使用PM2（推荐）
+
+  cd "C:\Users\Administrator\clawd"
+  npx pm2 start start_clawdbot.js --name clawdbot
+  npx pm2 save
+  npx pm2 startup
+
+  选项B：使用Windows计划任务
+
+  已有start_clawdbot_on_boot.bat，重启后运行：
+  start_clawdbot_on_boot.bat
+
+  Docker方案（备选）
+
+  如果重启后问题依旧，可以考虑Docker：
+  # 1. 启动Docker Desktop
+  # 2. 查看是否有clawdbot官方镜像
+  docker search clawdbot
+  # 3. 或从源码构建
+
+  重要文件位置
+
+  - 项目：C:\Users\Administrator\clawd
+  - 配置：C:\Users\Administrator\.clawdbot\clawdbot.json
+  - 网关端口：默认18789（已修改为18790避免冲突）
+
+  重启后如果仍有问题，请运行clawdbot doctor进行诊断，或尝试Docker方案。

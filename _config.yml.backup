@@ -1,0 +1,6 @@
+version: 2
+title: TikTok 达人合作邀请
+description: Amazon Top Seller | Influencer Outreach Templates
+theme: minima
+plugins:
+  - jekyll-seo-tag
