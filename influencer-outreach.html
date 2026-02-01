@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TikTok Influencer Outreach | 达人合作邀请</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #000000 0%, #1a1a2e 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #ff6b6b, #feca57);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #ff6b6b;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: bold;
+            margin-top: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: #667eea;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title .icon {
+            font-size: 1.8rem;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .highlight h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .highlight p {
+            font-size: 1.1rem;
+        }
+
+        .tier-box {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .tier {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            border: 3px solid #e0e0e0;
+            transition: all 0.3s;
+        }
+
+        .tier:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .tier.premium {
+            border-color: #feca57;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tier.premium::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #ff6b6b, #feca57);
+            padding: 8px;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .tier-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .tier-name {
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #1a1a2e;
+        }
+
+        .tier-desc {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .tier-features {
+            list-style: none;
+            padding: 0;
+        }
+
+        .tier-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            color: #333;
+        }
+
+        .tier-features li:last-child {
+            border-bottom: none;
+        }
+
+        .tier-features .check {
+            color: #00c851;
+            margin-right: 10px;
+        }
+
+        .tier-features .gold {
+            color: #feca57;
+            margin-right: 10px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-item {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid #e0e0e0;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #ff6b6b;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .timeline-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .timeline-content {
+            flex: 1;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            border-left: 3px solid #667eea;
+        }
+
+        .timeline-content h4 {
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .email-template {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            border: 2px solid #e0e0e0;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.8;
+            white-space: pre-wrap;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            background: #e0e0e0;
+            cursor: pointer;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .tab.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .warning {
+            background: #fff3cd;
+            border-left: 5px solid #ff6b6b;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 30px 0;
+        }
+
+        .warning-title {
+            color: #ff6b6b;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .copy-btn {
+            background: linear-gradient(135deg, #00c851 0%, #00a085 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: all 0.3s;
+        }
+
+        .copy-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(0,200,81,0.4);
+        }
+
+        .footer {
+            background: #1a1a2e;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .footer p {
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .tier-box {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .section {
+                padding: 20px;
+            }
+
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>TikTok Influencer Collaboration</h1>
+            <p>TikTok 达人合作邀请方案</p>
+            <span class="badge">LIMITED TIME | 限量合作</span>
+        </div>
+
+        <div class="content">
+            <!-- Highlight -->
+            <div class="highlight">
+                <h2>Top Amazon Seller Launching on TikTok</h2>
+                <h2>亚马逊大卖家入驻 TikTok，火爆开启！</h2>
+                <p>Millions sold on Amazon | 亚马逊销量百万</p>
+            </div>
+
+            <!-- Brand Stats -->
+            <div class="section">
+                <div class="section-title">
+                    <span class="icon">📊</span>
+                    <span>Our Performance | 我们的业绩</span>
+                </div>
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-number">100K+</div>
+                        <div class="stat-label">Monthly Sales<br>月销量</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">4.9★</div>
+                        <div class="stat-label">Rating<br>评分</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">99%</div>
+                        <div class="stat-label">Ship Rate<br>发货率</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">3-5d</div>
+                        <div class="stat-label">US Delivery<br>美仓到货</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Warning -->
+            <div class="warning">
+                <div class="warning-title">
+                    <span>⚠️</span>
+                    <span>Exclusive Offer | 独家限时优惠</span>
+                </div>
+                <p><strong>EN:</strong> Commission structure will end soon after reaching 50 partners! Act now for the highest commission rate.</p>
+                <p><strong>中文：</strong> 佣金制度将在合作满50人后取消！立即行动锁定最高佣金比例。</p>
+            </div>
+
+            <!-- Collaboration Tiers -->
+            <div class="section">
+                <div class="section-title">
+                    <span class="icon">🎯</span>
+                    <span>Collaboration Tiers | 合作方案</span>
+                </div>
+                <div class="tier-box">
+                    <div class="tier premium">
+                        <div class="tier-icon">👑</div>
+                        <div class="tier-name">Early Adopter<br>早期合伙人</div>
+                        <div class="tier-desc">First 50 influencers only<br>仅限前50名达人</div>
+                        <ul class="tier-features">
+                            <li><span class="gold">★</span>50% Commission on all sales<br>50% 销售佣金</li>
+                            <li><span class="gold">★</span>Free product samples<br>免费产品样品</li>
+                            <li><span class="gold">★</span>Priority US warehouse shipping<br>美仓优先发货</li>
+                            <li><span class="gold">★</span>Dedicated account manager<br>专属客户经理</li>
+                            <li><span class="gold">★</span>Monthly bonus opportunity<br>月度奖金机会</li>
+                        </ul>
+                    </div>
+                    <div class="tier">
+                        <div class="tier-icon">📹</div>
+                        <div class="tier-name">Quality Content<br>优质内容</div>
+                        <div class="tier-desc">For high-quality video creators<br>针对高质量视频创作者</div>
+                        <ul class="tier-features">
+                            <li><span class="check">✓</span>30% Commission on sales<br>30% 销售佣金</li>
+                            <li><span class="check">✓</span>Free product samples<br>免费产品样品</li>
+                            <li><span class="check">✓</span>Ad promotion support ($500-$2000)<br>广告推广支持</li>
+                            <li><span class="check">✓</span>Video boost from brand<br>品牌方视频助推</li>
+                            <li><span class="check">✓</span>Feature on brand channel<br>品牌频道推荐</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Timeline -->
+            <div class="section">
+                <div class="section-title">
+                    <span class="icon">📅</span>
+                    <span>What to Expect | 合作流程</span>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-icon">1</div>
+                        <div class="timeline-content">
+                            <h4>Apply / 申请</h4>
+                            <p>Send us your TikTok profile and recent tech content<br>发送你的 TikTok 账号和最近的科技内容</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon">2</div>
+                        <div class="timeline-content">
+                            <h4>Sample Shipment / 样品寄送</h4>
+                            <p>Free product from US warehouse, 3-5 days delivery<br>美仓免费寄送，3-5 天送达</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon">3</div>
+                        <div class="timeline-content">
+                            <h4>Create Content / 内容创作</h4>
+                            <p>Authentic review showcasing product features<br>真实测评展示产品特色</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon">4</div>
+                        <div class="timeline-content">
+                            <h4>Commission Earnings / 佣金结算</h4>
+                            <p>Monthly payout via PayPal/Wise<br>月度 PayPal/Wise 结算</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Email Templates -->
+            <div class="section">
+                <div class="section-title">
+                    <span class="icon">✉️</span>
+                    <span>Email Templates | 邮件模板</span>
+                </div>
+                <div class="tabs">
+                    <button class="tab active" onclick="showTab('nano')">Nano/Micro Influencer | 小微达人</button>
+                    <button class="tab" onclick="showTab('mid')">Mid-Tier Influencer | 中型达人</button>
+                    <button class="tab" onclick="showTab('premium')">Premium Partners | 优质合作</button>
+                </div>
+
+                <!-- Nano/Micro Template -->
+                <div id="nano" class="tab-content active">
+                    <h3>EN - Nano/Micro Influencer Outreach</h3>
+                    <div class="email-template">
+Subject: Loved your iPhone cable review! Let's collaborate 📱
+
+Hi [Influencer Name],
+
+I've been following your content for a while, and your recent post about [specific video topic] really resonated with me. The way you [specific detail] was spot-on.
+
+I'm [Your Name] from [Brand Name], a top Amazon seller with millions of monthly sales. We're now launching on TikTok and think your authentic approach to [tech reviews/accessories] would be a perfect fit for our community.
+
+🎉 EXCLUSIVE OFFER - First 50 Partners Only:
+We're currently looking for our first 50 influencer partners with special terms:
+• 50% commission on ALL sales through your link
+• Free product samples shipped from US warehouse (3-5 days)
+• Priority support and dedicated account manager
+• Monthly bonus opportunities
+
+⚠️ Important: After reaching 50 partners, this 50% commission structure will be discontinued. This is a limited-time opportunity!
+
+📦 What we're offering:
+• MFi certified Lightning/USB-C data cables
+• Fast charging cables (20W-30W)
+• Nylon braided / Aluminum alloy cables
+• US warehouse direct shipping, 3-5 days delivery
+
+📱 What we're looking for:
+• 1-2 TikTok videos (unboxing / review)
+• Authentic product experience sharing
+• Content posted within 48 hours of receipt
+
+Would you be interested in this exclusive partnership? I'd love to share more details and hear your creative ideas.
+
+Best regards,
+[Your Name]
+[Title] | [Brand Name]
+[Calendar link or email]
+                    </div>
+
+                    <hr style="margin: 30px 0; border-color: #667eea;">
+
+                    <h3>中文 - 小微达人合作邀请</h3>
+                    <div class="email-template">
+邮件主题: 喜欢你的 iPhone 数据线测评！我们来合作吧 📱
+
+Hi [达人名字],
+
+我关注你的内容有一段时间了，你最近关于 [具体视频主题] 的视频真的让我很有共鸣。你对 [具体细节] 的处理方式太到位了。
+
+我是 [你的名字] 来自 [品牌名称]，一家在亚马逊月销百万的大卖家。我们现在入驻 TikTok，觉得你对 [科技评测/配件] 的真诚风格非常适合我们产品的定位。
+
+🎉 独家优惠 - 仅限前 50 名合作伙伴：
+我们正在寻找首批 50 名达人合作伙伴，享受特殊待遇：
+• 所有销售 50% 佣金
+• 美国海外仓免费寄送样品（3-5 天送达）
+• 优先支持和专属客户经理
+• 月度奖金机会
+
+⚠️ 重要提示：合作满 50 人后，50% 佣金制度将取消。这是限时机会！
+
+📦 我们提供的产品：
+• 苹果 MFi 认证 Lightning/USB-C 数据线
+• 支持 20W-30W 的快充数据线
+• 尼龙编织 / 铝合金数据线
+• 美国海外仓直发，3-5 天送达
+
+📱 我们期望的内容：
+• 1-2 条 TikTok 视频（开箱/测评）
+• 真实的产品体验分享
+• 收到产品后 48 小时内发布
+
+你感兴趣加入这个独家合作吗？我愿意分享更多详情，也期待听到你的创意想法。
+
+Best regards,
+[你的名字]
+[职位] | [品牌名称]
+[日历链接或邮箱]
+                    </div>
+                </div>
+
+                <!-- Mid-Tier Template -->
+                <div id="mid" class="tab-content">
+                    <h3>EN - Mid-Tier Influencer Partnership</h3>
+                    <div class="email-template">
+Subject: Partnership: [Brand] x [Influencer] - Amazon Top Seller Launching on TikTok
+
+Hi [Influencer Name],
+
+Your recent content about [iPhone accessories/charging cable review] perfectly captures what we stand for at [Brand] — practical, high-quality tech accessories at unbeatable value.
+
+**Who We Are:**
+
+[Brand] is a top-tier Amazon seller with:
+• 100,000+ monthly sales volume
+• 4.9⭐ average customer rating
+• 99% on-time shipping rate
+• US-based warehouse with 3-5 day domestic delivery
+
+We're now launching our TikTok shop and your authentic voice would add credibility that paid ads simply can't replicate.
+
+**The Opportunity:**
+
+We're building our initial influencer network. You're among the first creators we're reaching out to with our exclusive launch offer:
+
+| Component | Details |
+|-----------|---------|
+| Commission Rate | 50% (First 50 partners only!) |
+| Product | MFi cables / Fast charging cables |
+| Samples | Free from US warehouse |
+| Delivery | 3-5 days to US addresses |
+| Exclusivity | Open - no category restrictions |
+
+**Why [Influencer Name]:**
+• Your tech review audience aligns perfectly with our target market
+• Your content about Apple accessories demonstrates expertise we value
+• [Specific engagement metric] shows genuine audience connection
+• Your content style matches our brand identity
+
+⚠️ TIME-SENSITIVE: This 50% commission structure is only available to our first 50 partners. Once filled, we'll move to our standard 30% + ad support tier.
+
+I'd love to schedule a 15-minute call to discuss creative direction and answer any questions. Would this week work for you?
+
+[Calendar booking link]
+
+Looking forward to potentially creating something amazing together!
+
+Best regards,
+[Your Name]
+[Title] | [Brand]
+[Phone] | [Email]
+                    </div>
+
+                    <hr style="margin: 30px 0; border-color: #667eea;">
+
+                    <h3>中文 - 中型达人合作方案</h3>
+                    <div class="email-template">
+邮件主题: 合作提案: [品牌] x [达人名字] - 亚马逊大卖家入驻 TikTok
+
+Hi [达人名字],
+
+你最近关于 [苹果配件/充电线测评] 的内容完美展现了 [品牌名称] 的定位——提供实用、高品质的科技配件，性价比无敌。
+
+**我们是谁：**
+
+[品牌名称] 是亚马逊顶级大卖家：
+• 月销量 100,000+
+• 平均评分 4.9⭐
+• 99% 及时发货率
+• 美国海外仓，3-5 天美国境内送达
+
+我们现在启动 TikTok 小店，你的真实声音能为我们带来付费广告无法复制的可信度。
+
+**合作机会：**
+
+我们正在搭建首批达人网络。你是我们首批联系的创作者之一，享受独家启动优惠：
+
+| 组件 | 详情 |
+|-----------|---------|
+| 佣金比例 | 50%（仅限前 50 名合作伙伴！） |
+| 产品 | MFi 数据线 / 快充数据线 |
+| 样品 | 美国海外仓免费寄送 |
+| 发货 | 3-5 天送达美国地址 |
+| 排他性 | 开放 - 无品类限制 |
+
+**为什么选择 [达人名字]：**
+• 你的科技测评受众与我们的目标市场完美匹配
+• 你对苹果配件的内容展示了我们认可的专业度
+• [具体互动数据] 证明了真实粉丝连接
+• 你的内容风格符合我们的品牌定位
+
+⚠️ 时间敏感：50% 佣金结构仅提供给前 50 名合作伙伴。一旦满员，我们将转到标准的 30% 佣金 + 广告支持方案。
+
+我希望能安排 15 分钟通话来讨论创意方向并回答任何问题。这周对你合适吗？
+
+[日历预订链接]
+
+期待与你共同创作精彩内容！
+
+Best regards,
+[你的名字]
+[职位] | [品牌名称]
+[电话] | [邮箱]
+                    </div>
+                </div>
+
+                <!-- Premium/Quality Template -->
+                <div id="premium" class="tab-content">
+                    <h3>EN - Quality Content Creator Collaboration</h3>
+                    <div class="email-template">
+Subject: Premium Partnership: [Brand] Ad Promotion Support for Quality Creators
+
+Hi [Influencer Name],
+
+I've been following your tech content for a while, and the quality of your [iPhone accessory reviews/unboxing videos] is exceptional.
+
+**Our Premium Partner Offer:**
+
+At [Brand], we're looking to collaborate with high-quality content creators on a special tier that combines guaranteed earnings with brand promotional support.
+
+**What We're Offering:**
+
+| Component | Details |
+|-----------|---------|
+| Commission | 30% on all sales through your unique link |
+| Free Sample | Full product set shipped from US warehouse |
+| Ad Support | $500-$2,000 ad budget for your best videos |
+| Video Boost | Brand account will boost your top-performing content |
+| Brand Feature | Your content featured on our official channels |
+
+**About [Brand]:**
+
+We're a top Amazon seller bringing quality tech accessories to millions of customers:
+• Lightning cables (MFi certified)
+• USB-C fast charging cables
+• Nylon braided & aluminum alloy options
+• 3-5 day US warehouse delivery
+
+**Why You're Perfect for Us:**
+
+• Your production quality exceeds industry standards
+• Your engagement shows highly loyal, tech-savvy audience
+• Your content style matches our brand identity perfectly
+• Your audience trust in your recommendations is exceptional
+
+**Collaboration Deliverables:**
+
+• 2-3 TikTok videos showcasing our products
+• Authentic, honest review format
+• Include product purchase link in bio/video
+• Post within 48 hours after receiving samples
+
+**Ad Support Details:**
+
+We'll provide a $500-$2,000 advertising budget specifically for promoting the best-performing content you create. This means:
+• Your video gets boosted on TikTok
+• You don't pay for promotion
+• You still earn 30% commission on all resulting sales
+• Win-win for both of us!
+
+I'm excited to discuss how we can amplify your content together. When would you be available for a quick call?
+
+[Calendar link]
+
+Let's create something amazing for your audience!
+
+Best regards,
+[Your Name]
+[Title] | [Brand]
+[Phone] | [Email]
+                    </div>
+
+                    <hr style="margin: 30px 0; border-color: #667eea;">
+
+                    <h3>中文 - 优质内容创作者合作方案</h3>
+                    <div class="email-template">
+邮件主题: 优质合作: [品牌] 为质量创作者提供广告推广支持
+
+Hi [达人名字],
+
+我关注你的科技内容有一段时间了，你的 [苹果配件测评/开箱视频] 质量非常出色。
+
+**我们的优质合作伙伴报价：**
+
+在 [品牌名称]，我们希望与高质量的内容创作者合作，这个特殊方案结合了保底收益与品牌推广支持。
+
+**我们提供的内容：**
+
+| 组件 | 详情 |
+|-----------|---------|
+| 佣金 | 通过你的专属链接所有销售 30% |
+| 免费样品 | 从美国海外仓寄送完整产品套装 |
+| 广告支持 | $500-$2,000 广告预算用于你的最佳视频 |
+| 视频助推 | 品牌账号将助推你的热门内容 |
+| 品牌推荐 | 你的内容在我们的官方渠道展示 |
+
+**关于 [品牌名称]：**
+
+我们是亚马逊顶级卖家，为百万客户提供优质科技配件：
+• Lightning 数据线（MFi 认证）
+• USB-C 快充数据线
+• 尼龙编织和铝合金选项
+• 3-5 天美国海外仓配送
+
+**为什么你对我们完美：**
+• 你的制作质量超越行业标准
+• 你的互动显示了高度忠诚、精通科技的受众
+• 你的内容风格与我们的品牌形象完美匹配
+• 你的受众对你的推荐信任度极高
+
+**合作交付内容：**
+• 2-3 条 TikTok 视频展示我们的产品
+• 真实、诚实的测评格式
+• 在简介/视频中包含产品购买链接
+• 收到样品后 48 小时内发布
+
+**广告支持详情：**
+
+我们将提供 $500-$2,000 的广告预算，专门用于推广你创作的最佳表现内容。这意味着：
+• 你的视频在 TikTok 上获得助推
+• 你无需为推广付费
+• 你仍然可以从所有产生的销售中获得 30% 佣金
+• 对我们双方都是双赢！
+
+我很兴奋地讨论如何共同放大你的内容。你什么时候方便进行快速通话？
+
+[日历链接]
+
+让我们一起为你的受众创作精彩内容！
+
+Best regards,
+[你的名字]
+[职位] | [品牌名称]
+[电话] | [邮箱]
+                    </div>
+                </div>
+            </div>
+
+            <!-- Follow-up Templates -->
+            <div class="section">
+                <div class="section-title">
+                    <span class="icon">🔄</span>
+                    <span>Follow-Up Templates | 追进邮件</span>
+                </div>
+                <div class="tabs">
+                    <button class="tab active" onclick="showFollowUp('f1')">Follow-Up #1 | 追进第1封</button>
+                    <button class="tab" onclick="showFollowUp('f2')">Follow-Up #2 | 追进第2封</button>
+                </div>
+
+                <div id="f1" class="tab-content active">
+                    <h3>EN - Follow-Up Email #1 (Day 3-5)</h3>
+                    <div class="email-template">
+Subject: Re: Your exclusive 50% commission offer | [Brand]
+
+Hi [Influencer Name],
+
+I wanted to follow up on my previous email about collaborating with [Brand] on TikTok.
+
+I know your inbox is probably overflowing, so I wanted to quickly remind you about our exclusive offer:
+
+🔥 STILL AVAILABLE: We're still looking for our first 50 partners at 50% commission!
+
+Recent updates:
+• Our US warehouse is fully operational
+• Sample shipping confirmed: 3-5 days to anywhere in US
+• First partners are already creating content and seeing great results
+
+If now isn't the right time, no worries at all. But I wanted to make sure you didn't miss out on this exclusive opportunity before we move to our standard tier.
+
+If you'd like to discuss this later, I'm here. Otherwise, thanks for your time, and I'll continue enjoying your tech content!
+
+Best,
+[Your Name]
+                    </div>
+
+                    <hr style="margin: 20px 0; border-color: #667eea;">
+
+                    <h3>中文 - 追进邮件 #1（第 3-5 天）</h3>
+                    <div class="email-template">
+邮件主题: Re: 你的独家 50% 佣金优惠 | [品牌]
+
+Hi [达人名字],
+
+我想跟进一下之前关于与 [品牌名称] 在 TikTok 合作的邮件。
+
+我知道你的邮箱可能爆满了，所以我快速提醒你我们的独家优惠：
+
+🔥 仍然开放：我们仍在寻找首批 50 名合作伙伴，享受 50% 佣金！
+
+最近更新：
+• 我们的美国海外仓已全面运营
+• 样品发货确认：3-5 天送达美国任何地方
+• 首批合作伙伴已经在创作内容，看到很好的结果
+
+如果现在不是合适的时机，完全没问题。但我希望你不会在我们转到标准档次之前错过这个独家机会。
+
+如果你想稍后讨论，我随时在这里。否则，感谢你的时间，我会继续欣赏你的科技内容！
+
+Best,
+[你的名字]
+                    </div>
+                </div>
+
+                <div id="f2" class="tab-content">
+                    <h3>EN - Follow-Up Email #2 (Day 10-14)</h3>
+                    <div class="email-template">
+Subject: Quick resource: Apple accessory trends for your content
+
+Hi [Influencer Name],
+
+I came across some industry trend data about Apple accessories and immediately thought of your tech review content. Thought you might find it useful:
+
+[Link to useful resources/trend data]
+
+If our [Brand] collaboration isn't the right fit, I completely understand. If you'd prefer not to receive outreach, just let me know.
+
+Either way, keep creating amazing tech content – your community clearly appreciates it!
+
+Cheers,
+[Your Name]
+                    </div>
+
+                    <hr style="margin: 20px 0; border-color: #667eea;">
+
+                    <h3>中文 - 追进邮件 #2（第 10-14 天）</h3>
+                    <div class="email-template">
+邮件主题: 快速资源：适用于你内容的苹果配件趋势
+
+Hi [达人名字],
+
+我最近看到了一些关于苹果配件的行业趋势数据，马上想到了你的科技测评内容。可能对你有用：
+
+[有用资源/趋势数据链接]
+
+如果我们 [品牌名称] 的合作不是合适的选择，我完全理解。如果你不希望收到推广邮件，请告诉我。
+
+无论如何，继续创作精彩的科技内容——你的社区显然很喜欢！
+
+Cheers,
+[你的名字]
+                    </div>
+                </div>
+            </div>
+
+            <button class="copy-btn" onclick="copyAllTemplates()">📋 Copy All Templates | 复制所有模板</button>
+        </div>
+
+        <div class="footer">
+            <p>Amazon Top Seller Launching on TikTok | 亚马逊大卖家入驻 TikTok</p>
+            <p>© 2026 [Brand Name] | All Rights Reserved</p>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabId) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            // Show selected tab content
+            document.getElementById(tabId).classList.add('active');
+
+            // Update tab buttons
+            document.querySelectorAll('.tab').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        function showFollowUp(fuId) {
+            document.querySelectorAll('.tab-content').forEach(content => {
+                if (content.id.startsWith('f')) {
+                    content.classList.remove('active');
+                }
+            });
+            document.getElementById(fuId).classList.add('active');
+
+            document.querySelectorAll('.tab').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        function copyAllTemplates() {
+            const templates = document.querySelectorAll('.email-template');
+            let allText = '';
+            templates.forEach(t => {
+                allText += t.innerText + '\n\n' + '='.repeat(80) + '\n\n';
+            });
+
+            navigator.clipboard.writeText(allText).then(() => {
+                alert('Templates copied to clipboard! | 模板已复制到剪贴板！');
+            });
+        }
+    </script>
+</body>
+</html>
